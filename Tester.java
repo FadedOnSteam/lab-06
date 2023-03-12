@@ -7,16 +7,18 @@ public class Tester{
     public static void main(String [] args)throws IOException{
         Scanner reader = new Scanner(new File ("dictionary.txt"));
         ArrayList<String> dictionary = new ArrayList<String>();
-        //ArrayList<String> dictionaryCopy = new ArrayList<String>();
+        ArrayList<String> dictionaryCopy = new ArrayList<String>();
 
         arrayGenerate(dictionary, reader);
 
-        //dictionaryCopy = copyArray(dictionary);
+        dictionaryCopy = copyArray(dictionary);
 
-        sorting.bubbleSort(dictionary);
+        sorting.bubbleSort(dictionaryCopy);
 
-        for (int i = 0; i < dictionary.size(); i++) {
-            System.out.println(dictionary.get(i));
+        sorting.quicksort(dictionaryCopy, 0, dictionaryCopy.size()-1);
+
+        for (int i = 0; i < dictionaryCopy.size(); i++) {
+            System.out.println(dictionaryCopy.get(i));
         }
 
     }
