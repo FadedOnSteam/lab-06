@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tester{
-    
     public static void main(String [] args)throws IOException{
         Scanner reader = new Scanner(new File ("dictionary.txt"));
         ArrayList<String> dictionary = new ArrayList<String>();
@@ -13,13 +12,13 @@ public class Tester{
 
         dictionaryCopy = copyArray(dictionary);
 
-        sorting.bubbleSort(dictionaryCopy);
+        //sorting.bubbleSort(dictionaryCopy);       commented out bubble sort due to it bogging down the time this program took to run
+
+        System.out.println(System.nanoTime());
 
         sorting.quicksort(dictionaryCopy, 0, dictionaryCopy.size()-1);
 
-        for (int i = 0; i < dictionaryCopy.size(); i++) {
-            System.out.println(dictionaryCopy.get(i));
-        }
+        System.out.println(System.nanoTime());
 
     }
     // method reads the dictionary.txt and addjavs each line to an Array List.

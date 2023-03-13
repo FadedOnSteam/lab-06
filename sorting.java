@@ -4,7 +4,7 @@ public class sorting{
         String temp;
         for (int i = 0; i < a.size()-1; i++) {
             for (int j = 0; j < a.size() - 1 - i; j++) {
-                if(a.get(j).compareTo(a.get(j+1)) < 0){
+                if(a.get(j).compareTo(a.get(j+1)) > 0){
                     temp = a.get(j);
                     a.set(j, a.get(j+1));
                     a.set(j+1, temp);
@@ -14,7 +14,20 @@ public class sorting{
         }
     }
     public static void selectionSort(ArrayList<String> a){
+        int indexSmallest;
+        String temp;
 
+        for (int i = 0; i < a.size(); i++) {
+            indexSmallest = i;
+            for (int j = i + 1; j < a.size(); j++) {
+                if(a.get(j).compareTo(a.get(indexSmallest)) < 0){
+                    indexSmallest = j;
+                }
+            }
+            temp = a.get(i);
+            a.set(i, a.get(indexSmallest));
+            a.set(indexSmallest, temp);
+        }
     }
     public static void insertionSort(ArrayList<String> a){
 
