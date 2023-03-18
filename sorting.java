@@ -88,7 +88,55 @@ public class sorting{
         quickSort(a, i, j);
         quickSort(a, j + 1, k);
    }
-   public static void mergeSort(){
+    public static void merge(String [] a, int i, int j, int k){
+        int mergedSize = k - i + 1;
+        String mergedString [] = new String [mergedSize];
+        int mergePos;
+        int leftPos;
+        int rightPos;
 
-   }
+        mergePos = 0;
+        leftPos = i;
+        rightPos = j + 1;
+
+        while(leftPos <= j && rightPos <= k){
+            if(a[leftPos].compareTo(a[rightPos]) > 0){
+                mergedString[mergePos] = a[leftPos];
+                ++leftPos;
+            }
+            else{
+                mergedString[mergePos] = a[rightPos];
+                ++rightPos;
+            }
+            ++mergePos;
+        }
+
+        while(leftPos <= j){
+            mergedString[mergePos] = a[leftPos];
+            ++leftPos;
+            ++mergePos;
+        }
+
+        while(rightPos <= k){
+            mergedString[mergePos] = a[rightPos];
+            ++rightPos;
+            ++mergePos;
+        }
+
+        for(mergePos = 0; mergePos < mergedSize; ++mergePos){
+            a[i + mergePos] = mergedString[mergePos];
+        }
+    }
+    public static void mergeSort(String [] a, int i, int k){
+        int j;
+
+        if(i < k){
+            j = (i + k) / 2;
+
+            mergeSort(a, i, j);
+            mergeSort(a, j + 1, k);
+
+            merge(a, i, j, k);
+        }
+    }
 }

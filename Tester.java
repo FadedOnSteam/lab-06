@@ -28,19 +28,24 @@ public class Tester{
         System.out.println("Bubble sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
 
         pretime = System.nanoTime();
-        sorting.quickSort(dictionaryCopy1, 0, dictionaryCopy1.length-1);
-        posttime = System.nanoTime();
-        System.out.println("Quick sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
-
-        pretime = System.nanoTime();
-        sorting.selectionSort(dictionaryCopy2);
+        sorting.selectionSort(dictionaryCopy1);
         posttime = System.nanoTime();
         System.out.println("Selection sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
 
         pretime = System.nanoTime();
-        sorting.insertionSort(dictionaryCopy3);
+        sorting.insertionSort(dictionaryCopy2);
         posttime = System.nanoTime();
         System.out.println("Insertion sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
+
+        pretime = System.nanoTime();
+        sorting.quickSort(dictionaryCopy3, 0, dictionaryCopy3.length-1);
+        posttime = System.nanoTime();
+        System.out.println("Quick sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
+
+        pretime = System.nanoTime();
+        sorting.mergeSort(dictionaryCopy4, 0, dictionaryCopy4.length-1);
+        posttime = System.nanoTime();
+        System.out.println("Merge sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
     }
     public static int findSize(Scanner reader){
         int size = 0;
