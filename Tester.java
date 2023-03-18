@@ -1,38 +1,74 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tester{
     public static void main(String [] args)throws IOException{
-        Scanner reader = new Scanner(new File ("dictionary.txt"));
-        ArrayList<String> dictionary = new ArrayList<String>();
-        ArrayList<String> dictionaryCopy = new ArrayList<String>();
+        File file = new File ("dictionary.txt");
+        Scanner reader = new Scanner(file);
 
-        arrayGenerate(dictionary, reader);
+        int size = findSize(reader);
+        reader.close();
+        
+        String [] dictionary = new String [size];
 
-        dictionaryCopy = copyArray(dictionary);
+        long pretime;
+        long posttime;
 
-        //sorting.bubbleSort(dictionaryCopy);       commented out bubble sort due to it bogging down the time this program took to run
+        //Generates the base array which all copies are based on
+        arrayGenerate(dictionary, file, size);
 
-        System.out.println(System.nanoTime());
+        //Copies the base array into 6 different arrays
+        String [] dictionaryCopy = copyArray(dictionary, size); String [] dictionaryCopy1 = copyArray(dictionary, size);
+        String [] dictionaryCopy2 = copyArray(dictionary, size); String [] dictionaryCopy3 = copyArray(dictionary, size);
+        String [] dictionaryCopy4 = copyArray(dictionary, size); String [] dictionaryCopy5 = copyArray(dictionary, size);
 
-        sorting.quicksort(dictionaryCopy, 0, dictionaryCopy.size()-1);
+        pretime = System.nanoTime();  
+        sorting.bubbleSort(dictionaryCopy);       
+        posttime = System.nanoTime();
+        System.out.println("Bubble sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
 
-        System.out.println(System.nanoTime());
+        pretime = System.nanoTime();
+        sorting.quickSort(dictionaryCopy1, 0, dictionaryCopy1.length-1);
+        posttime = System.nanoTime();
+        System.out.println("Quick sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
 
+        pretime = System.nanoTime();
+        sorting.selectionSort(dictionaryCopy2);
+        posttime = System.nanoTime();
+        System.out.println("Selection sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
+
+        pretime = System.nanoTime();
+        sorting.insertionSort(dictionaryCopy3);
+        posttime = System.nanoTime();
+        System.out.println("Insertion sort began at: " + pretime + " And ended at: " + posttime + "for a total of: " + (posttime - pretime));
+    }
+    public static int findSize(Scanner reader){
+        int size = 0;
+        while(reader.hasNext()){
+            reader.nextLine();
+            size++;
+        }
+        return size;
     }
     // method reads the dictionary.txt and addjavs each line to an Array List.
-    public static void arrayGenerate(ArrayList<String> a, Scanner reader){
-        while(reader.hasNext()){
-            a.add(reader.nextLine());
+    public static void arrayGenerate(String [] a, File file, int size)throws FileNotFoundException{
+        Scanner reader = new Scanner(file);
+        for (int i = 0; i < size; i++) {
+            a[i] = reader.nextLine();
         }
     }
     //creates a copy of the dictionary Array List
-    public static ArrayList<String> copyArray(ArrayList<String> a){
-        ArrayList<String> b = new ArrayList<String>();
-        for (int i = 0; i < a.size(); i++) {
-            b.add(a.get(i));
+    public static String[] copyArray(String [] a, int size){
+        String [] b = new String [size];
+        for (int i = 0; i < a.length; i++) {
+            b[i] = a[i];
         }
         return b;
+    }
+    //prints out the array
+    public static void print(String [] a){
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
     }
 }

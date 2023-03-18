@@ -1,38 +1,47 @@
 import java.util.ArrayList;
 public class sorting{
-    public static void bubbleSort(ArrayList<String> a){
+    public static void bubbleSort( String [] a){
         String temp;
-        for (int i = 0; i < a.size()-1; i++) {
-            for (int j = 0; j < a.size() - 1 - i; j++) {
-                if(a.get(j).compareTo(a.get(j+1)) > 0){
-                    temp = a.get(j);
-                    a.set(j, a.get(j+1));
-                    a.set(j+1, temp);
-
+        for (int i = 0; i < a.length-1; i++) {
+            for (int j = 0; j < a.length - 1 - i; j++) {
+                if(a[j].compareTo(a[j+1]) > 0){
+                    temp = a[j];
+                    a[j] = a[j+1];
+                    a[j+1] = temp;
                 }
             }
         }
     }
-    public static void selectionSort(ArrayList<String> a){
+    public static void selectionSort(String [] a){
         int indexSmallest;
         String temp;
 
-        for (int i = 0; i < a.size(); i++) {
+        for (int i = 0; i < a.length; i++) {
             indexSmallest = i;
-            for (int j = i + 1; j < a.size(); j++) {
-                if(a.get(j).compareTo(a.get(indexSmallest)) < 0){
+            for (int j = i + 1; j < a.length; j++) {
+                if(a[j].compareTo(a[indexSmallest]) < 0){
                     indexSmallest = j;
                 }
             }
-            temp = a.get(i);
-            a.set(i, a.get(indexSmallest));
-            a.set(indexSmallest, temp);
+            temp = a[i];
+            a[i] = a[indexSmallest];
+            a[indexSmallest] = temp;
         }
     }
-    public static void insertionSort(ArrayList<String> a){
-
+    public static void insertionSort(String [] a){
+        String temp;
+        int j;
+        for (int i = 0; i < a.length; i++) {
+            j = i;
+            while(j > 0 && a[j].compareTo(a[j-1]) < 0){
+                temp = a[j];
+                a[j] = a[j-1];
+                a[j-1] = temp;
+                --j;
+            }
+        }
     }
-    public static int partition(ArrayList<String> a, int i, int k) {
+    public static int partition(String [] a, int i, int k) {
         int midpoint;
         int low;
         int high;
@@ -41,26 +50,26 @@ public class sorting{
         boolean done;
 
         midpoint = i + (k - i) / 2;
-        pivot = a.get(midpoint);
+        pivot = a[midpoint];
 
         done = false;
         low = i;
         high = k;
 
         while(!done){
-            while(a.get(low).compareTo(pivot) < 0){
+            while(a[low].compareTo(pivot) < 0){
                 ++low;
             }
-            while(a.get(high).compareTo(pivot) > 0){
+            while(a[high].compareTo(pivot) > 0){
                 --high;
             }
             if(low >= high){
                 done = true;
             }
             else {
-                temp = a.get(low);
-                a.set(low, a.get(high));
-                a.set(high, temp);
+                temp = a[low];
+                a[low] = a[high];
+                a[high] = temp;
 
                 ++low;
                 --high;
@@ -68,7 +77,7 @@ public class sorting{
         }
         return high;
     }
-    public static void quicksort(ArrayList<String> a, int i, int k) {
+    public static void quickSort(String [] a, int i, int k) {
         int j;
         if(i >= k){
             return;
@@ -76,7 +85,10 @@ public class sorting{
 
         j = partition(a, i, k);
 
-        quicksort(a, i, j);
-        quicksort(a, j + 1, k);
+        quickSort(a, i, j);
+        quickSort(a, j + 1, k);
+   }
+   public static void mergeSort(){
+
    }
 }
