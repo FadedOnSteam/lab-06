@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 public class sorting{
     public static void bubbleSort( String [] a){
         String temp;
@@ -137,6 +136,41 @@ public class sorting{
             mergeSort(a, j + 1, k);
 
             merge(a, i, j, k);
+        }
+    }
+    public static void heapify(String [] a, int n, int i)
+    {
+        int largest = i; 
+        int l = 2 * i + 1; 
+        int r = 2 * i + 2; 
+ 
+        if (l < n && a[l].compareTo(a[largest]) > 0)
+            largest = l;
+ 
+        if (r < n && a[r].compareTo(a[largest]) > 0)
+            largest = r;
+ 
+        if (largest != i) {
+            String temp = a[i];
+            a[i] = a[largest];
+            a[largest] = temp;
+ 
+            heapify(a, n, largest);
+        }
+    }
+    public static void heapSort(String [] a){
+        int n = a.length;
+        String temp;
+
+        for (int i = n /2 - 1; i >= 0; i--) {
+            heapify(a, n, i);
+        }
+        for (int i = n - 1; i > 0; i--) {
+            temp = a[0];
+            a[0] = a[i];
+            a[i] = temp;
+
+            heapify(a, i , 0);
         }
     }
 }
